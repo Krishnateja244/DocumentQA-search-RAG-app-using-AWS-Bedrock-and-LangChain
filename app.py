@@ -51,8 +51,7 @@ def get_vector_store(docs):
 
 def get_claude_llm():
     ##create the Anthropic Model
-    llm=Bedrock(model_id="ai21.j2-mid-v1",client=bedrock,
-                model_kwargs={'maxTokens':512})
+    llm=Bedrock(model_id="anthropic.claude-v2",client=bedrock)
     
     return llm
 
@@ -113,7 +112,7 @@ def main():
 
     if st.button("Claude Output"):
         with st.spinner("Processing..."):
-            faiss_index = FAISS.load_local("faiss_index", bedrock_embeddings)
+            faiss_index = FAISS.load_local("faiss_index", bedrock_embeddings,allow_dangerous_deserialization=True)
             llm=get_claude_llm()
             
             #faiss_index = get_vector_store(docs)
@@ -122,7 +121,7 @@ def main():
 
     if st.button("Llama2 Output"):
         with st.spinner("Processing..."):
-            faiss_index = FAISS.load_local("faiss_index", bedrock_embeddings)
+            faiss_index = FAISS.load_local("faiss_index", bedrock_embeddings,allow_dangerous_deserialization=True)
             llm=get_llama2_llm()
             
             #faiss_index = get_vector_store(docs)
