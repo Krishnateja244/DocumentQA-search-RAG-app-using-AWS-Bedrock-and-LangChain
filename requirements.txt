@@ -3,3 +3,5 @@ awscli
 streamlit
 langchain
 pypdf
+faiss-gpu
+faiss-cpu
